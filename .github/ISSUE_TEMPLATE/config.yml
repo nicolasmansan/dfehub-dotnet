@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Vulnerabilidade de segurança
+    url: https://github.com/nicolasmansan/dfehub-dotnet/security/advisories/new
+    about: Use o relato privado para vulnerabilidades.
+  - name: Suporte oficial da Webmania
+    url: https://ajuda.webmania.com.br/
+    about: Este SDK é comunitário e não substitui o suporte do provedor.
+

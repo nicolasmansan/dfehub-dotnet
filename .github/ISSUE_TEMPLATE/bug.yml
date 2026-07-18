@@ -1,0 +1,55 @@
+name: Bug
+description: Relate um comportamento incorreto sem incluir dados fiscais reais.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Nunca publique tokens, certificados, XMLs ou dados pessoais reais.
+  - type: input
+    id: version
+    attributes:
+      label: Versão
+      placeholder: 0.1.0-alpha.1
+    validations:
+      required: true
+  - type: dropdown
+    id: api
+    attributes:
+      label: API
+      options:
+        - Fundação/configuração
+        - NF-e/NFC-e/MDe
+        - NFS-e
+        - CT-e/CT-e OS
+        - MDF-e
+        - NFCom
+        - DC-e
+        - Monitor Fiscal
+        - Validador Fiscal
+        - Gerencial B2B
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Comportamento observado
+      description: Use somente dados fictícios ou sanitizados.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reprodução mínima
+      render: csharp
+    validations:
+      required: true
+

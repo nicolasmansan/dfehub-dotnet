@@ -1,0 +1,69 @@
+name: Publish NuGet
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_NOLOGO: "1"
+
+jobs:
+  publish:
+    name: Validate and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: nuget-production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.1xx
+
+      - name: Resolve package version
+        shell: bash
+        run: echo "PACKAGE_VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+
+      - name: Restore
+        run: dotnet restore DFeHub.slnx
+
+      - name: Build
+        run: dotnet build DFeHub.slnx --configuration Release --no-restore
+
+      - name: Unit tests
+        run: dotnet test --project tests/DFeHub.Client.UnitTests/DFeHub.Client.UnitTests.csproj --configuration Release --no-build --no-restore
+
+      - name: Contract tests
+        run: dotnet test --project tests/DFeHub.Client.ContractTests/DFeHub.Client.ContractTests.csproj --configuration Release --no-build --no-restore
+
+      - name: Pack tagged version
+        run: dotnet pack src/DFeHub.Client/DFeHub.Client.csproj --configuration Release --no-build --output artifacts/packages -p:PackageVersion="$PACKAGE_VERSION"
+
+      - name: NuGet OIDC login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Push package
+        run: dotnet nuget push "artifacts/packages/DFeHub.Client.$PACKAGE_VERSION.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://www.nuget.org/api/v2/package
+
+      - name: Push symbols
+        run: dotnet nuget push "artifacts/packages/DFeHub.Client.$PACKAGE_VERSION.snupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://www.nuget.org/api/v2/package
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" artifacts/packages/* --verify-tag --generate-notes
+

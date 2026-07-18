@@ -1,0 +1,33 @@
+name: Divergência de contrato
+description: Relate um endpoint ou modelo diferente da documentação/SDK.
+title: "[Contrato]: "
+labels:
+  - contract
+body:
+  - type: input
+    id: documentation
+    attributes:
+      label: Documentação oficial
+      placeholder: https://webmania.com.br/docs/...
+    validations:
+      required: true
+  - type: input
+    id: operation
+    attributes:
+      label: API e operação
+      placeholder: NFS-e / consulta
+    validations:
+      required: true
+  - type: textarea
+    id: difference
+    attributes:
+      label: Divergência
+      description: Descreva campos, status ou rota usando conteúdo sanitizado.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidência sanitizada
+      description: Não inclua documentos, tokens ou dados pessoais reais.
+

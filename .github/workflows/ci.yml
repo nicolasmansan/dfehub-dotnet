@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_NOLOGO: "1"
+
+jobs:
+  validate:
+    name: Validate, test and pack
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.1xx
+
+      - name: Restore
+        run: dotnet restore DFeHub.slnx
+
+      - name: Verify formatting
+        run: dotnet format DFeHub.slnx --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build DFeHub.slnx --configuration Release --no-restore
+
+      - name: Test and collect coverage
+        shell: pwsh
+        run: ./eng/Test-WithCoverage.ps1 -NoBuild
+
+      - name: Pack
+        run: dotnet pack src/DFeHub.Client/DFeHub.Client.csproj --configuration Release --no-build --output artifacts/packages
+
+      - name: Restore package smoke test from local feed
+        run: >-
+          dotnet restore tests/DFeHub.Client.PackageSmokeTest/DFeHub.Client.PackageSmokeTest.csproj
+          --runtime linux-x64
+          --configfile tests/DFeHub.Client.PackageSmokeTest/NuGet.Config
+          -p:PublishAot=true
+          -p:SelfContained=true
+
+      - name: Run package smoke test
+        run: dotnet run --project tests/DFeHub.Client.PackageSmokeTest/DFeHub.Client.PackageSmokeTest.csproj --configuration Release --no-restore
+
+      - name: Publish Native AOT smoke test
+        run: dotnet publish tests/DFeHub.Client.PackageSmokeTest/DFeHub.Client.PackageSmokeTest.csproj --configuration Release --no-restore --runtime linux-x64 --self-contained true --output artifacts/aot
+
+      - name: Upload package and coverage
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dfehub-ci-artifacts
+          path: |
+            artifacts/packages
+            artifacts/coverage
+          if-no-files-found: error
+
+  portability:
+    name: Windows portability
+    runs-on: windows-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.1xx
+
+      - name: Restore
+        run: dotnet restore DFeHub.slnx
+
+      - name: Build
+        run: dotnet build DFeHub.slnx --configuration Release --no-restore
+
+      - name: Unit tests
+        run: dotnet test --project tests/DFeHub.Client.UnitTests/DFeHub.Client.UnitTests.csproj --configuration Release --no-build --no-restore
+
+      - name: Contract tests
+        run: dotnet test --project tests/DFeHub.Client.ContractTests/DFeHub.Client.ContractTests.csproj --configuration Release --no-build --no-restore

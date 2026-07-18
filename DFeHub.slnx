@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/DFeHub.Sample.Api/DFeHub.Sample.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/DFeHub.Client/DFeHub.Client.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DFeHub.Client.ContractTests/DFeHub.Client.ContractTests.csproj" />
+    <Project Path="tests/DFeHub.Client.UnitTests/DFeHub.Client.UnitTests.csproj" />
+  </Folder>
+</Solution>
+

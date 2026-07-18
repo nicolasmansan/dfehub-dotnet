@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <CodeCoverage>
+    <ModulePaths>
+      <Include>
+        <ModulePath>.*DFeHub\.dll$</ModulePath>
+      </Include>
+      <Exclude>
+        <ModulePath>.*Tests\.dll$</ModulePath>
+      </Exclude>
+    </ModulePaths>
+    <Attributes>
+      <Exclude>
+        <Attribute>^System\.CodeDom\.Compiler\.GeneratedCodeAttribute$</Attribute>
+        <Attribute>^System\.Diagnostics\.DebuggerHiddenAttribute$</Attribute>
+        <Attribute>^System\.Diagnostics\.DebuggerNonUserCodeAttribute$</Attribute>
+        <Attribute>^System\.Diagnostics\.CodeAnalysis\.ExcludeFromCodeCoverageAttribute$</Attribute>
+      </Exclude>
+    </Attributes>
+    <Sources>
+      <Exclude>
+        <Source>.*[\\/]+obj[\\/]+.*</Source>
+      </Exclude>
+    </Sources>
+    <UseVerifiableInstrumentation>True</UseVerifiableInstrumentation>
+    <EnableStaticManagedInstrumentation>True</EnableStaticManagedInstrumentation>
+    <EnableDynamicManagedInstrumentation>True</EnableDynamicManagedInstrumentation>
+  </CodeCoverage>
+</Configuration>
