@@ -1,0 +1,24 @@
+{
+  "status": true,
+  "modelo": "abrasf",
+  "versao": "2.04",
+  "ambientes": [1, 2],
+  "autenticacao": ["certificado_a1"],
+  "emissao": ["lote_rps", "nfse"],
+  "funcoes": ["consultar", "cancelar", "substituir"],
+  "codigo_servico": [
+    {
+      "codigo": "01.05",
+      "descricao": "Licenciamento de software",
+      "codigo_tributacao": "0105001",
+      "aliquota_sugerida": {
+        "iss": "2.00"
+      }
+    }
+  ],
+  "parametros_disponiveis": {
+    "servico.valor_servicos": "obrigatorio",
+    "tomador.cpf": "obrigatorio_pf",
+    "tomador.email": "opcional"
+  }
+}

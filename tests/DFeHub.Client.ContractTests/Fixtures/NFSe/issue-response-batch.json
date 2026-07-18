@@ -1,0 +1,33 @@
+{
+  "uuid": "76d50da8-5248-49ea-899f-8133a801451d",
+  "modelo": "lote_rps",
+  "status": "processado",
+  "motivo": "Lote processado com sucesso",
+  "numero_lote": "20260001",
+  "serie_lote": "A0",
+  "quantidade_rps": 2,
+  "protocolo": "202607180000001",
+  "info_nfse": [
+    {
+      "uuid": "127072a3-34c5-48c7-a160-f45816cbe532",
+      "modelo": "nfse",
+      "status": "aprovado",
+      "motivo": "Autorizado o uso da NFS-e",
+      "numero": "1001",
+      "codigo_verificacao": "ABC-123",
+      "xml": "https://api.webmania.com.br/xmlnfse/127072a3-34c5-48c7-a160-f45816cbe532",
+      "pdf_nfse": "https://api.webmania.com.br/nfse/127072a3-34c5-48c7-a160-f45816cbe532",
+      "pdf_nfse_status": "processado",
+      "pdf_rps": "https://api.webmania.com.br/darps/127072a3-34c5-48c7-a160-f45816cbe532"
+    },
+    {
+      "uuid": "13ac2e30-730d-41b3-94f8-51dbda9639e8",
+      "modelo": "nfse",
+      "status": "processando"
+    }
+  ],
+  "log": {
+    "codigo": "L001"
+  },
+  "atualizado_em": "2026-07-18T12:00:00-03:00"
+}

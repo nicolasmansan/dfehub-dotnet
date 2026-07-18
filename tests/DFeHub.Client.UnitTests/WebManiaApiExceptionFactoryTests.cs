@@ -31,6 +31,27 @@ public sealed class WebManiaApiExceptionFactoryTests
         Assert.Equal("Documento inválido.", Assert.Single(exception.Errors).Message);
     }
 
+    [Fact]
+    public async Task NFSe_msg_error_is_mapped_to_authentication_exception()
+    {
+        using var response = JsonResponse(
+            HttpStatusCode.Unauthorized,
+            """{"msg":"Acesso restrito."}""");
+
+        var exception = await WebManiaApiExceptionFactory.CreateAsync(
+            response,
+            "NFSe",
+            "Issue",
+            CancellationToken.None);
+
+        var authentication =
+            Assert.IsType<WebManiaAuthenticationException>(exception);
+        Assert.Equal("Acesso restrito.", authentication.Message);
+        Assert.Equal(
+            "Acesso restrito.",
+            Assert.Single(authentication.Errors).Message);
+    }
+
     [Theory]
     [InlineData(HttpStatusCode.Unauthorized)]
     [InlineData(HttpStatusCode.Forbidden)]
@@ -268,4 +289,3 @@ public sealed class WebManiaApiExceptionFactoryTests
         };
     }
 }
-

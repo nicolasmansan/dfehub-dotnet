@@ -13,11 +13,6 @@ public interface IWebManiaProductClient
 }
 
 /// <summary>
-/// Provides access to NFS-e operations.
-/// </summary>
-public interface INFSeClient : IWebManiaProductClient;
-
-/// <summary>
 /// Provides access to CT-e and CT-e OS operations.
 /// </summary>
 public interface ICTeClient : IWebManiaProductClient;

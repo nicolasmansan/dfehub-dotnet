@@ -1,0 +1,16 @@
+{
+  "uuid": "43eace5c-8008-4f6c-b830-b6d52d7ff90c",
+  "modelo": "nfse",
+  "status": "aprovado",
+  "motivo": "Autorizado o uso da NFS-e",
+  "numero": "25000",
+  "codigo_verificacao": "SFH-046",
+  "serie_rps": "A1",
+  "numero_rps": 2000,
+  "pdf_rps": "https://api.webmania.com.br/darps/43eace5c-8008-4f6c-b830-b6d52d7ff90c",
+  "pdf_nfse": "https://api.webmania.com.br/nfse/43eace5c-8008-4f6c-b830-b6d52d7ff90c",
+  "pdf_nfse_status": "processado",
+  "xml": "https://api.webmania.com.br/xmlnfse/43eace5c-8008-4f6c-b830-b6d52d7ff90c",
+  "log": "{...}",
+  "atualizado_em": "2026-07-18T12:00:00-03:00"
+}

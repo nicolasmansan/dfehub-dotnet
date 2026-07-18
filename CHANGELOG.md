@@ -8,8 +8,25 @@ versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Planejado
 
-- PR 2: NFS-e.
+- PR 3: CT-e e CT-e OS.
 - PRs seguintes conforme `PLANO_DE_IMPLEMENTACAO.md`.
+
+## [0.3.0-alpha.1] - 2026-07-18
+
+### Adicionado
+
+- Cliente `INFSeClient` para NFS-e e lote RPS na API 2.0.
+- Consulta de status municipal, emissão, consulta, cancelamento, substituição e
+  manifestação no Padrão Nacional.
+- Agendamento de emissão e cancelamento do agendamento pelo contrato oficial.
+- Download autenticado e em streaming de XML, PDF da NFS-e e PDF do RPS.
+- Modelos tipados para partes nacionais e estrangeiras, retenções, deduções,
+  reembolsos, construção civil, eventos, ISS e IBS/CBS.
+- Variações tipadas de todos os provedores publicados na documentação 3.1.1.
+- Serialização source-generated, validação determinística e fixtures de múltiplos
+  padrões de retorno.
+- Compatibilidade com a variante oficial de erro `msg`, agendamento civil com
+  precisão de minuto e bloqueio de downloads Bearer fora das rotas oficiais.
 
 ## [0.2.0-alpha.1] - 2026-07-18
 
@@ -39,6 +56,7 @@ versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Testes unitários, de contrato, cobertura e smoke test do pacote.
 - Workflows de CI, CodeQL e publicação OIDC.
 
-[Não publicado]: https://github.com/nicolasmansan/dfehub-dotnet/compare/v0.2.0-alpha.1...HEAD
+[Não publicado]: https://github.com/nicolasmansan/dfehub-dotnet/compare/v0.3.0-alpha.1...HEAD
+[0.3.0-alpha.1]: https://github.com/nicolasmansan/dfehub-dotnet/releases/tag/v0.3.0-alpha.1
 [0.2.0-alpha.1]: https://github.com/nicolasmansan/dfehub-dotnet/releases/tag/v0.2.0-alpha.1
 [0.1.0-alpha.1]: https://github.com/nicolasmansan/dfehub-dotnet/releases/tag/v0.1.0-alpha.1

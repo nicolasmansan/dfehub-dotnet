@@ -13,9 +13,6 @@ internal abstract class WebManiaProductClient(
             credentialGroup);
 }
 
-internal sealed class NFSeClient(IOptionsMonitor<WebManiaOptions> options)
-    : WebManiaProductClient(options, WebManiaCredentialGroup.ApiV2), INFSeClient;
-
 internal sealed class CTeClient(IOptionsMonitor<WebManiaOptions> options)
     : WebManiaProductClient(options, WebManiaCredentialGroup.ApiV2), ICTeClient;
 

@@ -234,6 +234,9 @@ public sealed class WebManiaDependencyInjectionTests
         string expectedAddress,
         TimeSpan expectedTimeout)
     {
+        var expectedSdkVersion =
+            typeof(IWebManiaClient).Assembly.GetName().Version?.ToString(3);
+
         Assert.Equal(new Uri(expectedAddress), client.BaseAddress);
         Assert.Equal(expectedTimeout, client.Timeout);
         Assert.Contains(
@@ -241,6 +244,8 @@ public sealed class WebManiaDependencyInjectionTests
             value => value.MediaType == "application/json");
         Assert.Contains(
             client.DefaultRequestHeaders.UserAgent,
-            value => value.Product?.Name == "DFeHub.Client");
+            value =>
+                value.Product?.Name == "DFeHub.Client" &&
+                value.Product.Version == expectedSdkVersion);
     }
 }

@@ -8,16 +8,16 @@ APIs fiscais e de faturamento da Webmania.
 
 ## Estado atual
 
-Versão: `0.2.0-alpha.1` — NF-e, NFC-e, CC-e e MDe.
+Versão: `0.3.0-alpha.1` — NF-e, NFC-e, CC-e, MDe e NFS-e.
 
-A PR 1 adiciona emissão, consulta, cancelamento, carta de correção, inutilização,
-manifestação do destinatário, eventos IBS/CBS e ECONF, classes de imposto,
-relatórios, atualização da empresa e download autenticado de artefatos.
+A PR 2 adiciona NFS-e síncrona e lote RPS, status municipal, consulta,
+cancelamento, substituição, manifestação, agendamento e artefatos. O contrato
+inclui Padrão Nacional, provedores municipais e os campos da reforma tributária.
 
 | API | Cliente | Estado |
 | --- | --- | --- |
 | NF-e, NFC-e, CC-e e MDe | `INFeClient` | Implementado |
-| NFS-e | `INFSeClient` | Fundação |
+| NFS-e | `INFSeClient` | Implementado |
 | CT-e e CT-e OS | `ICTeClient` | Fundação |
 | MDF-e | `IMDFeClient` | Fundação |
 | NFCom | `INFComClient` | Fundação |
@@ -137,6 +137,54 @@ if (nota.Xml is not null)
 
 Veja a [matriz completa de NF-e](docs/contracts/nfe.md) e o
 [projeto de exemplo](samples/DFeHub.Sample.Api).
+
+## NFS-e
+
+`NFSeIssueRequest` aceita de um a 50 RPS. Uma emissão individual pode retornar a
+NFS-e sincronamente; lotes e alguns municípios retornam processamento assíncrono.
+Use a URL de notificação e reconcilie atualizações por `UpdatedAt`.
+Agendamentos usam `DateTime` com `Kind.Unspecified`, segundos zerados, pois o
+contrato transmite um horário civil sem fuso (`yyyy-MM-dd HH:mm:00`).
+
+```csharp
+using DFeHub.Providers.WebMania;
+using DFeHub.Providers.WebMania.NFSe;
+
+var resultado = await webMania.NFSe.IssueAsync(
+    new NFSeIssueRequest
+    {
+        Environment = NFSeEnvironment.Certification,
+        Rps =
+        [
+            new NFSeRps
+            {
+                Service = new NFSeService
+                {
+                    Discrimination = "Serviço de homologação",
+                    ServiceValue = 15.00m,
+                    TaxClass = "REF000000",
+                },
+                Taker = new NFSeParty
+                {
+                    Cpf = "00000000000",
+                    FullName = "Tomador de homologação",
+                },
+            },
+        ],
+    },
+    cancellationToken);
+
+var atual = await webMania.NFSe.QueryByUuidAsync(
+    resultado.Uuid,
+    cancellationToken);
+```
+
+Antes de montar campos específicos, consulte
+`GetMunicipalityStatusAsync`: o retorno informa o provedor, a versão, os ambientes,
+as funções e os parâmetros aceitos. Use `TaxClass` para cálculo automático ou os
+campos explícitos do provedor; no Padrão Nacional, `IssTaxation` pode ser usado sem
+criar um objeto `Taxes` vazio. Veja a
+[matriz completa de NFS-e](docs/contracts/nfse.md).
 
 ## Autenticação
 

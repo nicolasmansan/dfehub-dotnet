@@ -95,7 +95,7 @@ internal static class WebManiaApiExceptionFactory
             AddErrors(payload.Error, errors);
             AddErrors(payload.Errors, errors);
 
-            var message = payload.Message ?? payload.Mensagem;
+            var message = payload.Message ?? payload.Mensagem ?? payload.Msg;
             var code = payload.Code ?? payload.Codigo;
 
             if (!string.IsNullOrWhiteSpace(message) &&
@@ -141,6 +141,7 @@ internal static class WebManiaApiExceptionFactory
         var message =
             GetString(element, "message") ??
             GetString(element, "mensagem") ??
+            GetString(element, "msg") ??
             GetString(element, "error") ??
             GetString(element, "erro");
         var code =
@@ -264,4 +265,3 @@ internal static class WebManiaApiExceptionFactory
         }
     }
 }
-

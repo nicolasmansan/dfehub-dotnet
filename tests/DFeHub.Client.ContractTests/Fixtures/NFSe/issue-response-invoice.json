@@ -1,0 +1,19 @@
+{
+  "uuid": "127072a3-34c5-48c7-a160-f45816cbe532",
+  "modelo": "nfse",
+  "status": "aprovado",
+  "motivo": "Autorizado o uso da NFS-e",
+  "numero": "1001",
+  "codigo_verificacao": "ABC-123",
+  "serie_rps": "A1",
+  "numero_rps": "2000",
+  "xml": "https://api.webmania.com.br/xmlnfse/127072a3-34c5-48c7-a160-f45816cbe532",
+  "pdf_nfse": "https://api.webmania.com.br/nfse/127072a3-34c5-48c7-a160-f45816cbe532",
+  "pdf_nfse_status": "processado",
+  "pdf_rps": "https://api.webmania.com.br/darps/127072a3-34c5-48c7-a160-f45816cbe532",
+  "log": {
+    "codigo": "N001"
+  },
+  "atualizado_em": "2026-07-18T12:00:00-03:00",
+  "campo_aditivo_futuro": "preservado"
+}

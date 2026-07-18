@@ -3,6 +3,7 @@ using DFeHub.Http;
 using DFeHub.Http.Authentication;
 using DFeHub.Providers.WebMania;
 using DFeHub.Providers.WebMania.NFe;
+using DFeHub.Providers.WebMania.NFSe;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -14,6 +15,14 @@ namespace Microsoft.Extensions.DependencyInjection;
 /// </summary>
 public static class WebManiaServiceCollectionExtensions
 {
+    private static readonly string SdkVersion =
+        typeof(WebManiaServiceCollectionExtensions)
+            .Assembly
+            .GetName()
+            .Version?
+            .ToString(3) ??
+        "0.0.0";
+
     /// <summary>
     /// Registers all Webmania clients and binds their options from configuration.
     /// </summary>
@@ -160,7 +169,7 @@ public static class WebManiaServiceCollectionExtensions
         client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
         client.DefaultRequestHeaders.UserAgent.Add(
-            new ProductInfoHeaderValue("DFeHub.Client", "0.1.0"));
+            new ProductInfoHeaderValue("DFeHub.Client", SdkVersion));
     }
 
     private static Uri EnsureTrailingSlash(Uri value)

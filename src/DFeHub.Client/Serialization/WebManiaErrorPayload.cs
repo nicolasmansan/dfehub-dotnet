@@ -17,10 +17,12 @@ internal sealed class WebManiaErrorPayload
     [JsonPropertyName("mensagem")]
     public string? Mensagem { get; init; }
 
+    [JsonPropertyName("msg")]
+    public string? Msg { get; init; }
+
     [JsonPropertyName("code")]
     public string? Code { get; init; }
 
     [JsonPropertyName("codigo")]
     public string? Codigo { get; init; }
 }
-

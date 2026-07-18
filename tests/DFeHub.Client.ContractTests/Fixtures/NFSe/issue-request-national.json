@@ -1,0 +1,50 @@
+{
+  "ID": "PEDIDO-123",
+  "ambiente": 2,
+  "url_notificacao": "https://example.test/webhooks/nfse",
+  "data_agendamento": "2026-07-20 14:30:00",
+  "rps": [
+    {
+      "servico": {
+        "discriminacao": "Licenciamento de software",
+        "valor_servicos": "150.00",
+        "iss_retido": 2,
+        "codigo_servico": "01.05.01",
+        "codigo_nbs": "115021000",
+        "tributacao_iss": 1,
+        "consumidor_final": 1,
+        "cod_indicador_operacao": "100501",
+        "impostos": {
+          "cst_pis_cofins": "00",
+          "ibs_cbs": {
+            "situacao_tributaria": "000",
+            "classificacao_tributaria": "000001",
+            "ibs_estadual": {
+              "aliquota_diferimento": "5.00",
+              "valor_devolvido": "0.00"
+            },
+            "ibs_municipal": {
+              "aliquota_diferimento": "5.00",
+              "valor_devolvido": "0.00"
+            },
+            "cbs": {
+              "aliquota_diferimento": "5.00",
+              "valor_devolvido": "0.00"
+            }
+          }
+        }
+      },
+      "tomador": {
+        "cnpj": "12345678000190",
+        "razao_social": "Empresa de Homologação",
+        "endereco": "Rua Fiscal",
+        "numero": "100",
+        "bairro": "Centro",
+        "cidade": "Curitiba",
+        "uf": "PR",
+        "cep": "80000000",
+        "email": "fiscal@example.test"
+      }
+    }
+  ]
+}
