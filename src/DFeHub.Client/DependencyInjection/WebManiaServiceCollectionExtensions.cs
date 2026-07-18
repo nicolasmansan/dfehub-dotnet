@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using DFeHub.Http;
 using DFeHub.Http.Authentication;
 using DFeHub.Providers.WebMania;
+using DFeHub.Providers.WebMania.NFe;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;

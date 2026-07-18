@@ -8,15 +8,15 @@ APIs fiscais e de faturamento da Webmania.
 
 ## Estado atual
 
-Versão: `0.1.0-alpha.1` — fundação do SDK.
+Versão: `0.2.0-alpha.1` — NF-e, NFC-e, CC-e e MDe.
 
-A PR 0 entrega configuração, autenticação, transporte HTTP, erros, streaming,
-telemetria, testes e empacotamento. Operações de emissão e consulta serão adicionadas
-uma API por PR; portanto, esta alpha ainda não emite documentos fiscais.
+A PR 1 adiciona emissão, consulta, cancelamento, carta de correção, inutilização,
+manifestação do destinatário, eventos IBS/CBS e ECONF, classes de imposto,
+relatórios, atualização da empresa e download autenticado de artefatos.
 
 | API | Cliente | Estado |
 | --- | --- | --- |
-| NF-e, NFC-e, CC-e e MDe | `INFeClient` | Fundação |
+| NF-e, NFC-e, CC-e e MDe | `INFeClient` | Implementado |
 | NFS-e | `INFSeClient` | Fundação |
 | CT-e e CT-e OS | `ICTeClient` | Fundação |
 | MDF-e | `IMDFeClient` | Fundação |
@@ -97,6 +97,47 @@ public sealed class FiscalHealthCheck(IWebManiaClient client)
 }
 ```
 
+## NF-e e NFC-e
+
+Os modelos usam nomes idiomáticos em C# e preservam o contrato da API 1.0 na
+serialização. Um exemplo mínimo de emissão em homologação:
+
+```csharp
+using DFeHub.Providers.WebMania;
+using DFeHub.Providers.WebMania.NFe;
+
+public sealed class EmitirNota(IWebManiaClient webMania)
+{
+    public Task<NFeDocumentResponse> ExecuteAsync(
+        NFeIssueRequest request,
+        CancellationToken cancellationToken)
+    {
+        return webMania.NFe.IssueAsync(request, cancellationToken);
+    }
+}
+```
+
+O `NFeIssueRequest` tipa destinatário, produtos, impostos, pedido, pagamentos,
+transporte, cobrança, referências, exportação e dados agropecuários. Para consultar
+uma nota ou baixar o XML retornado:
+
+```csharp
+var nota = await webMania.NFe.QueryByAccessKeyAsync(
+    chaveDe44Digitos,
+    cancellationToken);
+
+if (nota.Xml is not null)
+{
+    await using var arquivo = await webMania.NFe.DownloadAsync(
+        nota.Xml,
+        cancellationToken);
+    await arquivo.Content.CopyToAsync(destino, cancellationToken);
+}
+```
+
+Veja a [matriz completa de NF-e](docs/contracts/nfe.md) e o
+[projeto de exemplo](samples/DFeHub.Sample.Api).
+
 ## Autenticação
 
 | Grupo | Produtos | Contrato |
@@ -142,4 +183,3 @@ As metas de cobertura são 90% de linhas e 85% de branches. Veja
 ## Licença
 
 [MIT](LICENSE).
-

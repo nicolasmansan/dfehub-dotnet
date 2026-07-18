@@ -13,11 +13,6 @@ public interface IWebManiaProductClient
 }
 
 /// <summary>
-/// Provides access to NF-e, NFC-e, CC-e and MDe operations.
-/// </summary>
-public interface INFeClient : IWebManiaProductClient;
-
-/// <summary>
 /// Provides access to NFS-e operations.
 /// </summary>
 public interface INFSeClient : IWebManiaProductClient;
@@ -56,4 +51,3 @@ public interface IValidatorFiscalClient : IWebManiaProductClient;
 /// Provides access to Gerencial B2B operations.
 /// </summary>
 public interface IB2BClient : IWebManiaProductClient;
-

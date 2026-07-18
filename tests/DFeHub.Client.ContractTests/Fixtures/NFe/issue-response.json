@@ -1,0 +1,15 @@
+{
+  "uuid": "f7b16d40-0fe1-48f2-a174-5ca75a949adc",
+  "status": "aprovado",
+  "motivo": "Autorizado o uso da NF-e",
+  "nfe": "123",
+  "serie": "1",
+  "recibo": "352600000000001",
+  "chave": "35260712345678000190550010000001231000001234",
+  "modelo": "55",
+  "xml": "https://nfe.webmania.com.br/xml/2026/07/documento.xml",
+  "danfe": "https://nfe.webmania.com.br/danfe/2026/07/documento.pdf",
+  "campo_futuro": {
+    "versao": 2
+  }
+}

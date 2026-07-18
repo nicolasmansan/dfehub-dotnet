@@ -13,9 +13,6 @@ internal abstract class WebManiaProductClient(
             credentialGroup);
 }
 
-internal sealed class NFeClient(IOptionsMonitor<WebManiaOptions> options)
-    : WebManiaProductClient(options, WebManiaCredentialGroup.ApiV1), INFeClient;
-
 internal sealed class NFSeClient(IOptionsMonitor<WebManiaOptions> options)
     : WebManiaProductClient(options, WebManiaCredentialGroup.ApiV2), INFSeClient;
 
@@ -43,4 +40,3 @@ internal sealed class ValidatorFiscalClient(
 
 internal sealed class B2BClient(IOptionsMonitor<WebManiaOptions> options)
     : WebManiaProductClient(options, WebManiaCredentialGroup.B2B), IB2BClient;
-

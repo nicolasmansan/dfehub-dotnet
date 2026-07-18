@@ -3,13 +3,13 @@
     <AssemblyName>DFeHub</AssemblyName>
     <RootNamespace>DFeHub</RootNamespace>
     <PackageId>DFeHub.Client</PackageId>
-    <Version>0.1.0-alpha.1</Version>
+    <Version>0.2.0-alpha.1</Version>
     <Description>SDK .NET 10 comunitário e não oficial para integração tipada e assíncrona com as APIs fiscais e de faturamento da Webmania.</Description>
     <PackageTags>webmania;fiscal;nfe;nfce;nfse;cte;mdfe;nfcom;dce;dotnet</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/nicolasmansan/dfehub-dotnet</PackageProjectUrl>
-    <PackageReleaseNotes>Fundação do SDK: configuração, autenticação, transporte HTTP, diagnóstico e testes.</PackageReleaseNotes>
+    <PackageReleaseNotes>Cliente NF-e/NFC-e/CC-e/MDe completo: emissão, consultas, eventos, gestão e downloads.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>

@@ -1,0 +1,5 @@
+{
+  "error": "Requisição inválida.",
+  "message": "O campo produtos é obrigatório.",
+  "code": "NFE_INVALID"
+}

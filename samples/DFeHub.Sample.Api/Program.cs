@@ -1,4 +1,5 @@
 using DFeHub.Providers.WebMania;
+using DFeHub.Providers.WebMania.NFe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ app.MapGet(
         new
         {
             Package = "DFeHub.Client",
-            Foundation = "PR 0",
+            Release = "PR 1 — NF-e/NFC-e/CC-e/MDe",
             Configured = new
             {
                 NFe = client.NFe.IsConfigured,
@@ -27,5 +28,31 @@ app.MapGet(
                 B2B = client.B2B.IsConfigured,
             },
         }));
+
+app.MapPost(
+    "/nfe/emissao",
+    async (
+        NFeIssueRequest request,
+        IWebManiaClient client,
+        CancellationToken cancellationToken) =>
+    {
+        var response = await client.NFe.IssueAsync(
+            request,
+            cancellationToken);
+        return Results.Ok(response);
+    });
+
+app.MapGet(
+    "/nfe/{accessKey}",
+    async (
+        string accessKey,
+        IWebManiaClient client,
+        CancellationToken cancellationToken) =>
+    {
+        var response = await client.NFe.QueryByAccessKeyAsync(
+            accessKey,
+            cancellationToken);
+        return Results.Ok(response);
+    });
 
 app.Run();

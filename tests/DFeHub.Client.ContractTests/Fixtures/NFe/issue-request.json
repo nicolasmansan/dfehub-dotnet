@@ -1,0 +1,45 @@
+{
+  "ID": "PEDIDO-123",
+  "operacao": 1,
+  "natureza_operacao": "Venda de mercadoria",
+  "modelo": 1,
+  "finalidade": 1,
+  "ambiente": 2,
+  "data_emissao": "2026-07-18 14:30:00",
+  "cliente": {
+    "cpf": "12345678909",
+    "nome_completo": "Cliente de Homologação",
+    "endereco": "Avenida das Nações",
+    "numero": "100",
+    "bairro": "Centro",
+    "cidade": "Curitiba",
+    "uf": "PR",
+    "cep": "80000000"
+  },
+  "produtos": [
+    {
+      "nome": "Produto de teste",
+      "codigo": "SKU-1",
+      "ncm": "61091000",
+      "quantidade": "2",
+      "unidade": "UN",
+      "origem": 0,
+      "subtotal": "15.90",
+      "total": "31.80"
+    }
+  ],
+  "pedido": {
+    "presenca": 1,
+    "modalidade_frete": 9,
+    "total": "31.80",
+    "pagamento": [
+      0
+    ],
+    "forma_pagamento": [
+      "01"
+    ],
+    "valor_pagamento": [
+      "31.80"
+    ]
+  }
+}
