@@ -37,8 +37,6 @@ PRs.
 
 ## Instalação
 
-Quando a primeira alpha estiver publicada:
-
 ```shell
 dotnet add package DFeHub.Client --prerelease
 ```
